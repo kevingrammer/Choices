@@ -2,10 +2,7 @@ import Fuse from 'fuse.js';
 import classNames from 'classnames';
 import Store from './store/index.js';
 import {
-<<<<<<< HEAD
   setIsLoading,
-=======
->>>>>>> 8c75294... Add all files
   addItem,
   removeItem,
   highlightItem,
@@ -25,10 +22,7 @@ import {
   isType,
   isElement,
   strToEl,
-<<<<<<< HEAD
   stripHTML,
-=======
->>>>>>> 8c75294... Add all files
   extend,
   getWidthOfInput,
   sortByAlpha,
@@ -92,21 +86,14 @@ class Choices {
       noChoicesText: 'No choices to choose from',
       itemSelectText: 'Press to select',
       addItemText: (value) => {
-<<<<<<< HEAD
         return `Press Enter to add <b>"${stripHTML(value)}"</b>`;
-=======
-        return `Press Enter to add <b>"${value}"</b>`;
->>>>>>> 8c75294... Add all files
       },
       maxItemText: (maxItemCount) => {
         return `Only ${maxItemCount} values can be added.`;
       },
-<<<<<<< HEAD
       itemComparer: (choice, item) => {
         return choice === item;
       },
-=======
->>>>>>> 8c75294... Add all files
       uniqueItemText: 'Only unique values can be added.',
       classNames: {
         containerOuter: 'choices',
@@ -982,11 +969,7 @@ class Choices {
       choiceValue.forEach((val) => {
         const foundChoice = choices.find((choice) => {
           // Check 'value' property exists and the choice isn't already selected
-<<<<<<< HEAD
           return this.config.itemComparer(choice.value, val);
-=======
-          return choice.value === val;
->>>>>>> 8c75294... Add all files
         });
 
         if (foundChoice) {
@@ -1026,20 +1009,11 @@ class Choices {
         if (!isType('Array', choices) || !value) {
           return this;
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> 8c75294... Add all files
         // Clear choices if needed
         if (replaceChoices) {
           this._clearChoices();
         }
-<<<<<<< HEAD
-
         this._setLoading(true);
-
-=======
->>>>>>> 8c75294... Add all files
         // Add choices if passed
         if (choices && choices.length) {
           this.containerOuter.classList.remove(this.config.classNames.loadingState);
@@ -1064,12 +1038,7 @@ class Choices {
             }
           });
         }
-<<<<<<< HEAD
-
         this._setLoading(false);
-
-=======
->>>>>>> 8c75294... Add all files
       }
     }
     return this;
@@ -1420,15 +1389,10 @@ class Choices {
 
   /**
    * Apply or remove a loading state to the component.
-<<<<<<< HEAD
    * @param {Boolean} setLoading default value set to 'true'.
    * @return
    * @private
    */
-  _handleLoadingState(setLoading = true) {
-    let placeholderItem = this.itemList.querySelector(`.${this.config.classNames.placeholder}`);
-    if (setLoading) {
-=======
    * @param {Boolean} isLoading default value set to 'true'.
    * @return
    * @private
@@ -1436,7 +1400,6 @@ class Choices {
   _handleLoadingState(isLoading = true) {
     let placeholderItem = this.itemList.querySelector(`.${this.config.classNames.placeholder}`);
     if (isLoading) {
->>>>>>> 8c75294... Add all files
       this.containerOuter.classList.add(this.config.classNames.loadingState);
       this.containerOuter.setAttribute('aria-busy', 'true');
       if (this.isSelectOneElement) {
@@ -1478,12 +1441,7 @@ class Choices {
         // Remove loading states/text
         this._handleLoadingState(false);
         // Add each result as a choice
-<<<<<<< HEAD
-
         this._setLoading(true);
-
-=======
->>>>>>> 8c75294... Add all files
         parsedResults.forEach((result) => {
           if (result.choices) {
             const groupId = (result.id || null);
@@ -1505,12 +1463,7 @@ class Choices {
             );
           }
         });
-
-<<<<<<< HEAD
         this._setLoading(false);
-
-=======
->>>>>>> 8c75294... Add all files
         if (this.isSelectOneElement) {
           this._selectPlaceholderChoice();
         }
@@ -2770,15 +2723,12 @@ class Choices {
     this.config.templates = extend(templates, userTemplates);
   }
 
-<<<<<<< HEAD
   _setLoading(isLoading) {
     this.store.dispatch(
       setIsLoading(isLoading)
     );
   }
 
-=======
->>>>>>> 8c75294... Add all files
   /**
    * Create DOM structure around passed select element
    * @return
@@ -2857,11 +2807,8 @@ class Choices {
       this.highlightPosition = 0;
       this.isSearching = false;
 
-<<<<<<< HEAD
       this._setLoading(true);
 
-=======
->>>>>>> 8c75294... Add all files
       if (passedGroups && passedGroups.length) {
         passedGroups.forEach((group) => {
           this._addGroup(group, (group.id || null));
@@ -2920,12 +2867,8 @@ class Choices {
           }
         });
       }
-<<<<<<< HEAD
-
       this._setLoading(false);
 
-=======
->>>>>>> 8c75294... Add all files
     } else if (this.isTextElement) {
       // Add any preset values seperated by delimiter
       this.presetItems.forEach((item) => {

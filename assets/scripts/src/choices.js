@@ -485,13 +485,9 @@ class Choices {
    * @private
    */
   render() {
-<<<<<<< HEAD
     if(this.store.isLoading()) {
       return;
     }
-
-=======
->>>>>>> 8c75294... Add all files
     this.currentState = this.store.getState();
 
     // Only render if our state has actually changed

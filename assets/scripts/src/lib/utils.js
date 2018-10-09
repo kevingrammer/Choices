@@ -1,4 +1,4 @@
-/* eslint-disable */
+import { get } from 'lodash-es';
 /**
  * Capitalises the first letter of each word in a string
  * @param  {String} str String to capitalise
@@ -579,4 +579,14 @@ export const triggerEvent = (element, type, customArgs = null) => {
   });
 
   return element.dispatchEvent(event);
+};
+
+/**
+ * Access placeholder safely
+ * @param  {Object} obj    Object to access
+ * @param  {String} path   Path to placeholder property
+ * @return {String}        Placeholder or ''
+ */
+export const getPlaceholder = (obj = {}, path = 'placeholder') => {
+  return get(obj, path, '');
 };

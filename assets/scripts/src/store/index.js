@@ -116,7 +116,7 @@ export default class Store {
    */
   getSearchableChoices() {
     const filtered = this.getChoicesFilteredBySelectable();
-    return filtered.filter(choice => choice.placeholder !== true);
+    return filtered.filter((choice = {}) => choice.placeholder !== true);
   }
 
   /**
@@ -180,7 +180,7 @@ export default class Store {
     const choices = this.getChoices();
     const placeholderChoice = [...choices]
       .reverse()
-      .find((choice) => {
+      .find((choice = {}) => {
         return choice.placeholder === true;
       });
 

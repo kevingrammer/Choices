@@ -1,4 +1,4 @@
-const choices = (state = [], action) => {
+const choices = (state = [], action = {}) => {
   switch (action.type) {
     case 'ADD_CHOICE': {
       /*

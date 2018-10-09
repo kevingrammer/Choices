@@ -17,6 +17,7 @@ from './actions/index';
 import {
   isScrolledIntoView,
   getAdjacentEl,
+  getPlaceholder,
   wrap,
   getType,
   isType,
@@ -186,8 +187,8 @@ class Choices {
 
     this.placeholder = false;
     if (!this.isSelectOneElement) {
-      this.placeholder = this.config.placeholder ?
-      (this.config.placeholderValue || this.passedElement.getAttribute('placeholder')) :
+      this.placeholder = getPlaceholder(this.config) ?
+      (this.config.placeholderValue || this.passedElement && this.passedElement.getAttribute('placeholder')) :
       false;
     }
 
@@ -395,7 +396,7 @@ class Choices {
 
     // Split array into placeholders and "normal" choices
     const { placeholderChoices, normalChoices } = rendererableChoices.reduce((acc, choice) => {
-      if (choice.placeholder) {
+      if (getPlaceholder(choice)) {
         acc.placeholderChoices.push(choice);
       } else {
         acc.normalChoices.push(choice);
@@ -910,7 +911,7 @@ class Choices {
                 false,
                 -1,
                 item.customProperties,
-                item.placeholder
+                getPlaceholder(item)
               );
             } else {
               this._addItem(
@@ -919,7 +920,7 @@ class Choices {
                 item.id,
                 undefined,
                 item.customProperties,
-                item.placeholder
+                getPlaceholder(item)
               );
             }
           } else if (itemType === 'String') {
@@ -1201,7 +1202,7 @@ class Choices {
         placeholderChoice.id,
         placeholderChoice.groupId,
         null,
-        placeholderChoice.placeholder
+        getPlaceholder(placeholderChoice)
       );
       this._triggerChange(placeholderChoice.value);
     }
@@ -1390,7 +1391,7 @@ class Choices {
    * @private
    */
   _handleLoadingState(isLoading = true) {
-    let placeholderItem = this.itemList.querySelector(`.${this.config.classNames.placeholder}`);
+    let placeholderItem = this.itemList.querySelector(`.${getPlaceholder(this.config.classNames)}`);
     if (isLoading) {
       this.containerOuter.classList.add(this.config.classNames.loadingState);
       this.containerOuter.setAttribute('aria-busy', 'true');
@@ -1402,6 +1403,7 @@ class Choices {
           placeholderItem.innerHTML = this.config.loadingText;
         }
       } else {
+        console.info('else loading', this);
         this.input.placeholder = this.config.loadingText;
       }
     } else {
@@ -1409,9 +1411,10 @@ class Choices {
       this.containerOuter.classList.remove(this.config.classNames.loadingState);
 
       if (this.isSelectOneElement) {
-        placeholderItem.innerHTML = (this.placeholder || '');
+        placeholderItem.innerHTML = (getPlaceholder(this) || '');
       } else {
-        this.input.placeholder = (this.placeholder || '');
+        console.info('else2 loading', this);
+        this.input.placeholder = (getPlaceholder(this) || '');
       }
     }
   }
@@ -1595,7 +1598,7 @@ class Choices {
    * @return
    */
   _setInputWidth() {
-    if (this.placeholder) {
+    if (this && this.placeholder) {
       // If there is a placeholder, we only want to set the width of the input when it is a greater
       // length than 75% of the placeholder. This stops the input jumping around.
       if (this.input.value && this.input.value.length >= (this.placeholder.length / 1.25)) {
@@ -2428,7 +2431,7 @@ class Choices {
           isOptDisabled,
           groupId,
           option.customProperties,
-          option.placeholder
+          getPlaceholder(option)
         );
       });
     } else {
@@ -2507,7 +2510,7 @@ class Choices {
       },
       placeholder: (value) => {
         return strToEl(`
-          <div class="${globalClasses.placeholder}">
+          <div class="${getPlaceholder(globalClasses)}">
             ${value}
           </div>
         `);
@@ -2768,9 +2771,9 @@ class Choices {
     // Wrapper inner container with outer container
     wrap(containerInner, containerOuter);
 
-    if (this.isSelectOneElement) {
+    if (this.isSelectOneElement && input) {
       input.placeholder = this.config.searchPlaceholderValue || '';
-    } else if (this.placeholder) {
+    } else if (this.placeholder && input) {
       input.placeholder = this.placeholder;
       input.style.width = getWidthOfInput(input);
     }

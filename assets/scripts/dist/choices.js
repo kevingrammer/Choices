@@ -6088,6 +6088,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'placeholder';
 
+	  console.info('getPlaceholder', obj, path);
 	  return obj && obj[path] || '';
 	};
 

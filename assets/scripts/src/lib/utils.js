@@ -588,5 +588,6 @@ export const triggerEvent = (element, type, customArgs = null) => {
  * @return {String}        Placeholder or ''
  */
 export const getPlaceholder = (obj = {}, path = 'placeholder') => {
+  console.info('getPlaceholder', obj, path);
   return obj && obj[path] || ''
 };

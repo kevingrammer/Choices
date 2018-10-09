@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 /*! choices.js v3.0.4 | (c) 2018 Josh Johnson | https://github.com/jshjohnson/Choices#readme */ 
-=======
-/*! choices.js v3.0.2 | (c) 2017 Josh Johnson | https://github.com/jshjohnson/Choices#readme */ 
->>>>>>> 8c75294... Add all files
-=======
-/*! choices.js v3.0.2 | (c) 2018 Josh Johnson | https://github.com/jshjohnson/Choices#readme */ 
->>>>>>> a225e19... build
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -86,27 +78,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _index2 = _interopRequireDefault(_index);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	var _index3 = __webpack_require__(31);
-
-	var _utils = __webpack_require__(32);
-
-	__webpack_require__(33);
-=======
 	var _index3 = __webpack_require__(30);
-=======
-	var _index3 = __webpack_require__(29);
->>>>>>> a225e19... build
 
-	var _utils = __webpack_require__(30);
+	var _utils = __webpack_require__(31);
 
-<<<<<<< HEAD
 	__webpack_require__(32);
->>>>>>> 8c75294... Add all files
-=======
-	__webpack_require__(31);
->>>>>>> a225e19... build
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -173,21 +149,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      noChoicesText: 'No choices to choose from',
 	      itemSelectText: 'Press to select',
 	      addItemText: function addItemText(value) {
-<<<<<<< HEAD
 	        return 'Press Enter to add <b>"' + (0, _utils.stripHTML)(value) + '"</b>';
-=======
-	        return 'Press Enter to add <b>"' + value + '"</b>';
->>>>>>> 8c75294... Add all files
 	      },
 	      maxItemText: function maxItemText(maxItemCount) {
 	        return 'Only ' + maxItemCount + ' values can be added.';
 	      },
-<<<<<<< HEAD
 	      itemComparer: function itemComparer(choice, item) {
 	        return choice === item;
 	      },
-=======
->>>>>>> 8c75294... Add all files
 	      uniqueItemText: 'Only unique values can be added.',
 	      classNames: {
 	        containerOuter: 'choices',
@@ -610,18 +579,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'render',
 	    value: function render() {
-<<<<<<< HEAD
-<<<<<<< HEAD
+	      var _this4 = this;
+
 	      if (this.store.isLoading()) {
 	        return;
 	      }
-
-=======
->>>>>>> 8c75294... Add all files
-=======
-	      var _this4 = this;
-
->>>>>>> a225e19... build
 	      this.currentState = this.store.getState();
 
 	      // Only render if our state has actually changed
@@ -1126,11 +1088,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        choiceValue.forEach(function (val) {
 	          var foundChoice = choices.find(function (choice) {
 	            // Check 'value' property exists and the choice isn't already selected
-<<<<<<< HEAD
-	            return _this11.config.itemComparer(choice.value, val);
-=======
-	            return choice.value === val;
->>>>>>> 8c75294... Add all files
+	            return _this12.config.itemComparer(choice.value, val);
 	          });
 
 	          if (foundChoice) {
@@ -1169,20 +1127,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	          if (!(0, _utils.isType)('Array', choices) || !value) {
 	            return this;
 	          }
-<<<<<<< HEAD
-
-=======
->>>>>>> 8c75294... Add all files
 	          // Clear choices if needed
 	          if (replaceChoices) {
 	            this._clearChoices();
 	          }
-<<<<<<< HEAD
-
 	          this._setLoading(true);
-
-=======
->>>>>>> 8c75294... Add all files
 	          // Add choices if passed
 	          if (choices && choices.length) {
 	            this.containerOuter.classList.remove(this.config.classNames.loadingState);
@@ -1194,11 +1143,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              }
 	            });
 	          }
-<<<<<<< HEAD
-
 	          this._setLoading(false);
-=======
->>>>>>> 8c75294... Add all files
 	        }
 	      }
 	      return this;
@@ -1565,11 +1510,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    /**
 	     * Apply or remove a loading state to the component.
-<<<<<<< HEAD
-	     * @param {Boolean} setLoading default value set to 'true'.
-=======
 	     * @param {Boolean} isLoading default value set to 'true'.
->>>>>>> 8c75294... Add all files
 	     * @return
 	     * @private
 	     */
@@ -1577,17 +1518,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: '_handleLoadingState',
 	    value: function _handleLoadingState() {
-<<<<<<< HEAD
-	      var setLoading = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
-	      var placeholderItem = this.itemList.querySelector('.' + this.config.classNames.placeholder);
-	      if (setLoading) {
-=======
 	      var isLoading = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
 	      var placeholderItem = this.itemList.querySelector('.' + this.config.classNames.placeholder);
 	      if (isLoading) {
->>>>>>> 8c75294... Add all files
 	        this.containerOuter.classList.add(this.config.classNames.loadingState);
 	        this.containerOuter.setAttribute('aria-busy', 'true');
 	        if (this.isSelectOneElement) {
@@ -1634,12 +1568,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          // Remove loading states/text
 	          _this16._handleLoadingState(false);
 	          // Add each result as a choice
-<<<<<<< HEAD
-
-	          _this15._setLoading(true);
-
-=======
->>>>>>> 8c75294... Add all files
+	          _this16._setLoading(true);
 	          parsedResults.forEach(function (result) {
 	            if (result.choices) {
 	              var groupId = result.id || null;
@@ -1648,19 +1577,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	              _this16._addChoice(result[value], result[label], result.selected, result.disabled, undefined, result.customProperties, result.placeholder);
 	            }
 	          });
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-	          _this15._setLoading(false);
-
-=======
->>>>>>> 8c75294... Add all files
-	          if (_this15.isSelectOneElement) {
-	            _this15._selectPlaceholderChoice();
-=======
+	          _this16._setLoading(false);
 	          if (_this16.isSelectOneElement) {
 	            _this16._selectPlaceholderChoice();
->>>>>>> a225e19... build
 	          }
 	        } else {
 	          // No results, remove loading state
@@ -2798,14 +2717,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      this.config.templates = (0, _utils.extend)(templates, userTemplates);
 	    }
-<<<<<<< HEAD
 	  }, {
 	    key: '_setLoading',
 	    value: function _setLoading(isLoading) {
 	      this.store.dispatch((0, _index3.setIsLoading)(isLoading));
 	    }
-=======
->>>>>>> 8c75294... Add all files
 
 	    /**
 	     * Create DOM structure around passed select element
@@ -2887,11 +2803,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.highlightPosition = 0;
 	        this.isSearching = false;
 
-<<<<<<< HEAD
 	        this._setLoading(true);
 
-=======
->>>>>>> 8c75294... Add all files
 	        if (passedGroups && passedGroups.length) {
 	          passedGroups.forEach(function (group) {
 	            _this24._addGroup(group, group.id || null);
@@ -2936,11 +2849,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	          });
 	        }
-<<<<<<< HEAD
-
 	        this._setLoading(false);
-=======
->>>>>>> 8c75294... Add all files
 	      } else if (this.isTextElement) {
 	        // Add any preset values seperated by delimiter
 	        this.presetItems.forEach(function (item) {
@@ -3799,7 +3708,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2016 Jed Watson.
+	  Copyright (c) 2017 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
@@ -3821,8 +3730,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				if (argType === 'string' || argType === 'number') {
 					classes.push(arg);
-				} else if (Array.isArray(arg)) {
-					classes.push(classNames.apply(null, arg));
+				} else if (Array.isArray(arg) && arg.length) {
+					var inner = classNames.apply(null, arg);
+					if (inner) {
+						classes.push(inner);
+					}
 				} else if (argType === 'object') {
 					for (var key in arg) {
 						if (hasOwn.call(arg, key) && arg[key]) {
@@ -3836,6 +3748,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		}
 
 		if (typeof module !== 'undefined' && module.exports) {
+			classNames.default = classNames;
 			module.exports = classNames;
 		} else if (true) {
 			// register as 'classnames', consistent with npm package name
@@ -3916,7 +3829,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-<<<<<<< HEAD
 	     * Get loading state from store
 	     * @return {Boolean} Loading State
 	     */
@@ -3929,8 +3841,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-=======
->>>>>>> 8c75294... Add all files
 	     * Get items from store
 	     * @return {Array} Item objects
 	     */
@@ -4207,8 +4117,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	var ActionTypes = exports.ActionTypes = {
 	  INIT: '@@redux/INIT'
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 	  /**
 	   * Creates a Redux store that holds the state tree.
@@ -4236,65 +4144,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * and subscribe to changes.
 	   */
 	};function createStore(reducer, preloadedState, enhancer) {
-=======
-	};
-
-	/**
-	 * Creates a Redux store that holds the state tree.
-	 * The only way to change the data in the store is to call `dispatch()` on it.
-	 *
-	 * There should only be a single store in your app. To specify how different
-	 * parts of the state tree respond to actions, you may combine several reducers
-	 * into a single reducer function by using `combineReducers`.
-	 *
-	 * @param {Function} reducer A function that returns the next state tree, given
-	 * the current state tree and the action to handle.
-	 *
-	 * @param {any} [preloadedState] The initial state. You may optionally specify it
-	 * to hydrate the state from the server in universal apps, or to restore a
-	 * previously serialized user session.
-	 * If you use `combineReducers` to produce the root reducer function, this must be
-	 * an object with the same shape as `combineReducers` keys.
-	 *
-	 * @param {Function} enhancer The store enhancer. You may optionally specify it
-	 * to enhance the store with third-party capabilities such as middleware,
-	 * time travel, persistence, etc. The only store enhancer that ships with Redux
-	 * is `applyMiddleware()`.
-	 *
-	 * @returns {Store} A Redux store that lets you read the state, dispatch actions
-	 * and subscribe to changes.
-	 */
-	function createStore(reducer, preloadedState, enhancer) {
->>>>>>> 8c75294... Add all files
-=======
-
-	  /**
-	   * Creates a Redux store that holds the state tree.
-	   * The only way to change the data in the store is to call `dispatch()` on it.
-	   *
-	   * There should only be a single store in your app. To specify how different
-	   * parts of the state tree respond to actions, you may combine several reducers
-	   * into a single reducer function by using `combineReducers`.
-	   *
-	   * @param {Function} reducer A function that returns the next state tree, given
-	   * the current state tree and the action to handle.
-	   *
-	   * @param {any} [preloadedState] The initial state. You may optionally specify it
-	   * to hydrate the state from the server in universal apps, or to restore a
-	   * previously serialized user session.
-	   * If you use `combineReducers` to produce the root reducer function, this must be
-	   * an object with the same shape as `combineReducers` keys.
-	   *
-	   * @param {Function} [enhancer] The store enhancer. You may optionally specify it
-	   * to enhance the store with third-party capabilities such as middleware,
-	   * time travel, persistence, etc. The only store enhancer that ships with Redux
-	   * is `applyMiddleware()`.
-	   *
-	   * @returns {Store} A Redux store that lets you read the state, dispatch actions
-	   * and subscribe to changes.
-	   */
-	};function createStore(reducer, preloadedState, enhancer) {
->>>>>>> e0166ea... Build Script
 	  var _ref2;
 
 	  if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
@@ -4428,17 +4277,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var listeners = currentListeners = nextListeners;
 	    for (var i = 0; i < listeners.length; i++) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 	      var listener = listeners[i];
 	      listener();
-=======
-	      listeners[i]();
->>>>>>> 8c75294... Add all files
-=======
-	      var listener = listeners[i];
-	      listener();
->>>>>>> e0166ea... Build Script
 	    }
 
 	    return action;
@@ -4467,15 +4307,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Interoperability point for observable/reactive libraries.
 	   * @returns {observable} A minimal observable of state changes.
 	   * For more information, see the observable proposal:
-<<<<<<< HEAD
-<<<<<<< HEAD
 	   * https://github.com/tc39/proposal-observable
-=======
-	   * https://github.com/zenparsing/es-observable
->>>>>>> 8c75294... Add all files
-=======
-	   * https://github.com/tc39/proposal-observable
->>>>>>> e0166ea... Build Script
 	   */
 	  function observable() {
 	    var _ref;
@@ -4915,15 +4747,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var actionType = action && action.type;
 	  var actionName = actionType && '"' + actionType.toString() + '"' || 'an action';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	  return 'Given action ' + actionName + ', reducer "' + key + '" returned undefined. ' + 'To ignore an action, you must explicitly return the previous state. ' + 'If you want this reducer to hold no value, you can return null instead of undefined.';
-=======
-	  return 'Given action ' + actionName + ', reducer "' + key + '" returned undefined. ' + 'To ignore an action, you must explicitly return the previous state.';
->>>>>>> 8c75294... Add all files
-=======
-	  return 'Given action ' + actionName + ', reducer "' + key + '" returned undefined. ' + 'To ignore an action, you must explicitly return the previous state. ' + 'If you want this reducer to hold no value, you can return null instead of undefined.';
->>>>>>> e0166ea... Build Script
 	}
 
 	function getUnexpectedStateShapeWarningMessage(inputState, reducers, action, unexpectedKeyCache) {
@@ -4951,42 +4775,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	function assertReducerShape(reducers) {
-=======
-	function assertReducerSanity(reducers) {
->>>>>>> 8c75294... Add all files
-=======
-	function assertReducerShape(reducers) {
->>>>>>> e0166ea... Build Script
 	  Object.keys(reducers).forEach(function (key) {
 	    var reducer = reducers[key];
 	    var initialState = reducer(undefined, { type: _createStore.ActionTypes.INIT });
 
 	    if (typeof initialState === 'undefined') {
-<<<<<<< HEAD
-<<<<<<< HEAD
 	      throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined. If you don\'t want to set a value for this reducer, ' + 'you can use null instead of undefined.');
-=======
-	      throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined.');
->>>>>>> 8c75294... Add all files
-=======
-	      throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined. If you don\'t want to set a value for this reducer, ' + 'you can use null instead of undefined.');
->>>>>>> e0166ea... Build Script
 	    }
 
 	    var type = '@@redux/PROBE_UNKNOWN_ACTION_' + Math.random().toString(36).substring(7).split('').join('.');
 	    if (typeof reducer(undefined, { type: type }) === 'undefined') {
-<<<<<<< HEAD
-<<<<<<< HEAD
 	      throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + _createStore.ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined, but can be null.');
-=======
-	      throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + _createStore.ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined.');
->>>>>>> 8c75294... Add all files
-=======
-	      throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + _createStore.ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined, but can be null.');
->>>>>>> e0166ea... Build Script
 	    }
 	  });
 	}
@@ -5025,8 +4825,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	  var finalReducerKeys = Object.keys(finalReducers);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	  var unexpectedKeyCache = void 0;
 	  if (false) {
 	    unexpectedKeyCache = {};
@@ -5045,33 +4843,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (shapeAssertionError) {
 	      throw shapeAssertionError;
-=======
-=======
-	  var unexpectedKeyCache = void 0;
->>>>>>> e0166ea... Build Script
-	  if (false) {
-	    unexpectedKeyCache = {};
-	  }
-
-	  var shapeAssertionError = void 0;
-	  try {
-	    assertReducerShape(finalReducers);
-	  } catch (e) {
-	    shapeAssertionError = e;
-	  }
-
-	  return function combination() {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	    var action = arguments[1];
-
-<<<<<<< HEAD
-	    if (sanityError) {
-	      throw sanityError;
->>>>>>> 8c75294... Add all files
-=======
-	    if (shapeAssertionError) {
-	      throw shapeAssertionError;
->>>>>>> e0166ea... Build Script
 	    }
 
 	    if (false) {
@@ -5083,39 +4854,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var hasChanged = false;
 	    var nextState = {};
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> e0166ea... Build Script
 	    for (var _i = 0; _i < finalReducerKeys.length; _i++) {
 	      var _key = finalReducerKeys[_i];
 	      var reducer = finalReducers[_key];
 	      var previousStateForKey = state[_key];
-<<<<<<< HEAD
 	      var nextStateForKey = reducer(previousStateForKey, action);
 	      if (typeof nextStateForKey === 'undefined') {
 	        var errorMessage = getUndefinedStateErrorMessage(_key, action);
 	        throw new Error(errorMessage);
 	      }
 	      nextState[_key] = nextStateForKey;
-=======
-	    for (var i = 0; i < finalReducerKeys.length; i++) {
-	      var key = finalReducerKeys[i];
-	      var reducer = finalReducers[key];
-	      var previousStateForKey = state[key];
-=======
->>>>>>> e0166ea... Build Script
-	      var nextStateForKey = reducer(previousStateForKey, action);
-	      if (typeof nextStateForKey === 'undefined') {
-	        var errorMessage = getUndefinedStateErrorMessage(_key, action);
-	        throw new Error(errorMessage);
-	      }
-<<<<<<< HEAD
-	      nextState[key] = nextStateForKey;
->>>>>>> 8c75294... Add all files
-=======
-	      nextState[_key] = nextStateForKey;
->>>>>>> e0166ea... Build Script
 	      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
 	    }
 	    return hasChanged ? nextState : state;
@@ -5305,27 +5053,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return funcs[0];
 	  }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> e0166ea... Build Script
 	  return funcs.reduce(function (a, b) {
 	    return function () {
 	      return a(b.apply(undefined, arguments));
 	    };
 	  });
-<<<<<<< HEAD
-=======
-	  var last = funcs[funcs.length - 1];
-	  var rest = funcs.slice(0, -1);
-	  return function () {
-	    return rest.reduceRight(function (composed, f) {
-	      return f(composed);
-	    }, last.apply(undefined, arguments));
-	  };
->>>>>>> 8c75294... Add all files
-=======
->>>>>>> e0166ea... Build Script
 	}
 
 /***/ }),
@@ -5352,24 +5084,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _choices2 = _interopRequireDefault(_choices);
 
-<<<<<<< HEAD
-	var _general = __webpack_require__(30);
+	var _general = __webpack_require__(29);
 
 	var _general2 = _interopRequireDefault(_general);
 
-=======
->>>>>>> 8c75294... Add all files
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var appReducer = (0, _redux.combineReducers)({
 	  items: _items2.default,
 	  groups: _groups2.default,
-<<<<<<< HEAD
 	  choices: _choices2.default,
 	  general: _general2.default
-=======
-	  choices: _choices2.default
->>>>>>> 8c75294... Add all files
 	});
 
 	var rootReducer = function rootReducer(passedState, action) {
@@ -5632,7 +5357,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-<<<<<<< HEAD
 	var general = function general() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { loading: false };
 	  var action = arguments[1];
@@ -5655,7 +5379,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = general;
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -5663,8 +5387,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-=======
->>>>>>> 8c75294... Add all files
 	var addItem = exports.addItem = function addItem(value, label, id, choiceId, groupId, customProperties, placeholder, keyCode) {
 	  return {
 	    type: 'ADD_ITEM',
@@ -5746,7 +5468,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return {
 	    type: 'CLEAR_ALL'
 	  };
-<<<<<<< HEAD
 	};
 
 	var setIsLoading = exports.setIsLoading = function setIsLoading(isLoading) {
@@ -5757,17 +5478,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		};
 
 /***/ }),
-/* 32 */
-=======
-		};
-
-/***/ }),
-<<<<<<< HEAD
 /* 31 */
->>>>>>> 8c75294... Add all files
-=======
-/* 30 */
->>>>>>> a225e19... build
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -6208,14 +5919,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	/**
-<<<<<<< HEAD
-	 * Escape html in a string
-	 * @param  {String} html  Initial string/html
-	 * @return {String}  Sanitised string
-	 */
-	var stripHTML = exports.stripHTML = function stripHTML(html) {
-	  return html.replace(/&/g, '&amp;').replace(/>/g, '&rt;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-=======
 	 * Remove html tags from a string
 	 * @param  {String}  Initial string/html
 	 * @return {String}  Sanitised string
@@ -6224,7 +5927,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var el = document.createElement("DIV");
 	  el.innerHTML = html;
 	  return el.textContent || el.innerText || "";
->>>>>>> 8c75294... Add all files
 	};
 
 	/**
@@ -6285,11 +5987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var width = input.offsetWidth;
 
 	  if (value) {
-<<<<<<< HEAD
 	    var testEl = strToEl('<span>' + stripHTML(value) + '</span>');
-=======
-	    var testEl = strToEl('<span>' + value + '</span>');
->>>>>>> 8c75294... Add all files
 	    testEl.style.position = 'absolute';
 	    testEl.style.padding = '0';
 	    testEl.style.top = '-9999px';
@@ -6372,15 +6070,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-<<<<<<< HEAD
-<<<<<<< HEAD
-/* 33 */
-=======
 /* 32 */
->>>>>>> 8c75294... Add all files
-=======
-/* 31 */
->>>>>>> a225e19... build
 /***/ (function(module, exports) {
 
 	'use strict';

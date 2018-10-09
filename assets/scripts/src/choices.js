@@ -1385,10 +1385,6 @@ class Choices {
 
   /**
    * Apply or remove a loading state to the component.
-   * @param {Boolean} setLoading default value set to 'true'.
-   * @return
-   * @private
-   */
    * @param {Boolean} isLoading default value set to 'true'.
    * @return
    * @private

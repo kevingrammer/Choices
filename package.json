@@ -1,9 +1,9 @@
 {
   "name": "choices.js",
   "version": "3.0.4",
+  "types": "./types/index.d.ts",
   "description": "A vanilla JS customisable text input/select box plugin",
   "main": "./assets/scripts/dist/choices.min.js",
-  "types": "./types/index.d.ts",
   "scripts": {
     "start": "node server.js",
     "test": "karma start --single-run --no-auto-watch tests/karma.config.js",

@@ -488,7 +488,6 @@ class Choices {
     if(this.store.isLoading()) {
       return;
     }
-
     this.currentState = this.store.getState();
 
     // Only render if our state has actually changed
@@ -516,7 +515,22 @@ class Choices {
 
           // If we have grouped options
           if (activeGroups.length >= 1 && this.isSearching !== true) {
-            choiceListFragment = this.renderGroups(activeGroups, activeChoices, choiceListFragment);
+            activeChoices.reduce((groupIds, activeChoice) => {
+              const groupId = activeChoice.groupId;
+              // If the choice is not part of a group
+              if (groupId < 0 || groupId === undefined) {
+                choiceListFragment = this.renderChoices([activeChoice], choiceListFragment);
+              } else {
+                // If the choice group hasn't already been rendered
+                if (groupIds.indexOf(groupId) < 0) {
+                  // Get the group corresponding to the choice
+                  const activeGroup = activeGroups.filter((group) => group.id === groupId);
+                  choiceListFragment = this.renderGroups(activeGroup, activeChoices, choiceListFragment);
+                  groupIds.push(groupId);
+                }
+              }
+              return groupIds;
+            }, []);
           } else if (activeChoices.length >= 1) {
             choiceListFragment = this.renderChoices(activeChoices, choiceListFragment);
           }
@@ -991,14 +1005,11 @@ class Choices {
         if (!isType('Array', choices) || !value) {
           return this;
         }
-
         // Clear choices if needed
         if (replaceChoices) {
           this._clearChoices();
         }
-
         this._setLoading(true);
-
         // Add choices if passed
         if (choices && choices.length) {
           this.containerOuter.classList.remove(this.config.classNames.loadingState);
@@ -1023,9 +1034,7 @@ class Choices {
             }
           });
         }
-
         this._setLoading(false);
-
       }
     }
     return this;
@@ -1376,13 +1385,13 @@ class Choices {
 
   /**
    * Apply or remove a loading state to the component.
-   * @param {Boolean} setLoading default value set to 'true'.
+   * @param {Boolean} isLoading default value set to 'true'.
    * @return
    * @private
    */
-  _handleLoadingState(setLoading = true) {
+  _handleLoadingState(isLoading = true) {
     let placeholderItem = this.itemList.querySelector(`.${this.config.classNames.placeholder}`);
-    if (setLoading) {
+    if (isLoading) {
       this.containerOuter.classList.add(this.config.classNames.loadingState);
       this.containerOuter.setAttribute('aria-busy', 'true');
       if (this.isSelectOneElement) {
@@ -1424,9 +1433,7 @@ class Choices {
         // Remove loading states/text
         this._handleLoadingState(false);
         // Add each result as a choice
-
         this._setLoading(true);
-
         parsedResults.forEach((result) => {
           if (result.choices) {
             const groupId = (result.id || null);
@@ -1448,9 +1455,7 @@ class Choices {
             );
           }
         });
-
         this._setLoading(false);
-
         if (this.isSelectOneElement) {
           this._selectPlaceholderChoice();
         }
@@ -2854,7 +2859,6 @@ class Choices {
           }
         });
       }
-
       this._setLoading(false);
 
     } else if (this.isTextElement) {

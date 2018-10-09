@@ -243,9 +243,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.highlightPosition = 0;
 	    this.canSearch = this.config.searchEnabled;
-
+	    console.info('1', this, this.placeholder);
 	    this.placeholder = false;
 	    if (!this.isSelectOneElement) {
+	      console.info('2', this, this.placeholder);
 	      this.placeholder = (0, _utils.getPlaceholder)(this.config) ? this.config.placeholderValue || this.passedElement && this.passedElement.getAttribute('placeholder') : false;
 	    }
 
@@ -1732,6 +1733,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: '_setInputWidth',
 	    value: function _setInputWidth() {
+	      console.info('3', this, this.placeholder);
 	      if (this && this.placeholder) {
 	        // If there is a placeholder, we only want to set the width of the input when it is a greater
 	        // length than 75% of the placeholder. This stops the input jumping around.
@@ -2775,8 +2777,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      (0, _utils.wrap)(containerInner, containerOuter);
 
 	      if (this.isSelectOneElement && input) {
+	        console.info('4', { input: input });
 	        input.placeholder = this.config.searchPlaceholderValue || '';
 	      } else if (this.placeholder && input) {
+	        console.info('5', { input: input });
 	        input.placeholder = this.placeholder;
 	        input.style.width = (0, _utils.getWidthOfInput)(input);
 	      }

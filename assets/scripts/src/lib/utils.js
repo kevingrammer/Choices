@@ -1,4 +1,4 @@
-import { get } from 'lodash-es';
+/* eslint-disable */
 /**
  * Capitalises the first letter of each word in a string
  * @param  {String} str String to capitalise
@@ -588,5 +588,5 @@ export const triggerEvent = (element, type, customArgs = null) => {
  * @return {String}        Placeholder or ''
  */
 export const getPlaceholder = (obj = {}, path = 'placeholder') => {
-  return get(obj, path, '');
+  return obj && obj[placeholder] || ''
 };

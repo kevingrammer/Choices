@@ -82,7 +82,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utils = __webpack_require__(31);
 
-	__webpack_require__(32);
+	__webpack_require__(33);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -246,7 +246,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.placeholder = false;
 	    if (!this.isSelectOneElement) {
-	      this.placeholder = this.config.placeholder ? this.config.placeholderValue || this.passedElement.getAttribute('placeholder') : false;
+	      this.placeholder = (0, _utils.getPlaceholder)(this.config) ? this.config.placeholderValue || this.passedElement && this.passedElement.getAttribute('placeholder') : false;
 	    }
 
 	    // Assign preset choices from passed object
@@ -475,7 +475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Split array into placeholders and "normal" choices
 
 	      var _rendererableChoices$ = rendererableChoices.reduce(function (acc, choice) {
-	        if (choice.placeholder) {
+	        if ((0, _utils.getPlaceholder)(choice)) {
 	          acc.placeholderChoices.push(choice);
 	        } else {
 	          acc.normalChoices.push(choice);
@@ -1043,9 +1043,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // If we are dealing with a select input, we need to create an option first
 	            // that is then selected. For text inputs we can just add items normally.
 	            if (!_this11.isTextElement) {
-	              _this11._addChoice(item.value, item.label, true, false, -1, item.customProperties, item.placeholder);
+	              _this11._addChoice(item.value, item.label, true, false, -1, item.customProperties, (0, _utils.getPlaceholder)(item));
 	            } else {
-	              _this11._addItem(item.value, item.label, item.id, undefined, item.customProperties, item.placeholder);
+	              _this11._addItem(item.value, item.label, item.id, undefined, item.customProperties, (0, _utils.getPlaceholder)(item));
 	            }
 	          } else if (itemType === 'String') {
 	            if (!_this11.isTextElement) {
@@ -1328,7 +1328,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var placeholderChoice = this.store.getPlaceholderChoice();
 
 	      if (placeholderChoice) {
-	        this._addItem(placeholderChoice.value, placeholderChoice.label, placeholderChoice.id, placeholderChoice.groupId, null, placeholderChoice.placeholder);
+	        this._addItem(placeholderChoice.value, placeholderChoice.label, placeholderChoice.id, placeholderChoice.groupId, null, (0, _utils.getPlaceholder)(placeholderChoice));
 	        this._triggerChange(placeholderChoice.value);
 	      }
 	    }
@@ -1520,7 +1520,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function _handleLoadingState() {
 	      var isLoading = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
-	      var placeholderItem = this.itemList.querySelector('.' + this.config.classNames.placeholder);
+	      var placeholderItem = this.itemList.querySelector('.' + (0, _utils.getPlaceholder)(this.config.classNames));
 	      if (isLoading) {
 	        this.containerOuter.classList.add(this.config.classNames.loadingState);
 	        this.containerOuter.setAttribute('aria-busy', 'true');
@@ -1532,6 +1532,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            placeholderItem.innerHTML = this.config.loadingText;
 	          }
 	        } else {
+	          console.info('else loading', this);
 	          this.input.placeholder = this.config.loadingText;
 	        }
 	      } else {
@@ -1539,9 +1540,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.containerOuter.classList.remove(this.config.classNames.loadingState);
 
 	        if (this.isSelectOneElement) {
-	          placeholderItem.innerHTML = this.placeholder || '';
+	          placeholderItem.innerHTML = (0, _utils.getPlaceholder)(this) || '';
 	        } else {
-	          this.input.placeholder = this.placeholder || '';
+	          console.info('else2 loading', this);
+	          this.input.placeholder = (0, _utils.getPlaceholder)(this) || '';
 	        }
 	      }
 	    }
@@ -1730,7 +1732,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: '_setInputWidth',
 	    value: function _setInputWidth() {
-	      if (this.placeholder) {
+	      if (this && this.placeholder) {
 	        // If there is a placeholder, we only want to set the width of the input when it is a greater
 	        // length than 75% of the placeholder. This stops the input jumping around.
 	        if (this.input.value && this.input.value.length >= this.placeholder.length / 1.25) {
@@ -2595,7 +2597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        groupChoices.forEach(function (option) {
 	          var isOptDisabled = option.disabled || option.parentNode && option.parentNode.disabled;
-	          _this22._addChoice(option[valueKey], (0, _utils.isType)('Object', option) ? option[labelKey] : option.innerHTML, option.selected, isOptDisabled, groupId, option.customProperties, option.placeholder);
+	          _this22._addChoice(option[valueKey], (0, _utils.isType)('Object', option) ? option[labelKey] : option.innerHTML, option.selected, isOptDisabled, groupId, option.customProperties, (0, _utils.getPlaceholder)(option));
 	        });
 	      } else {
 	        this.store.dispatch((0, _index3.addGroup)(group.label, group.id, false, group.disabled));
@@ -2652,7 +2654,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          return (0, _utils.strToEl)('\n          <div class="' + localClasses + '"></div>\n        ');
 	        },
 	        placeholder: function placeholder(value) {
-	          return (0, _utils.strToEl)('\n          <div class="' + globalClasses.placeholder + '">\n            ' + value + '\n          </div>\n        ');
+	          return (0, _utils.strToEl)('\n          <div class="' + (0, _utils.getPlaceholder)(globalClasses) + '">\n            ' + value + '\n          </div>\n        ');
 	        },
 	        item: function item(data) {
 	          var _classNames2;
@@ -2772,9 +2774,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Wrapper inner container with outer container
 	      (0, _utils.wrap)(containerInner, containerOuter);
 
-	      if (this.isSelectOneElement) {
+	      if (this.isSelectOneElement && input) {
 	        input.placeholder = this.config.searchPlaceholderValue || '';
-	      } else if (this.placeholder) {
+	      } else if (this.placeholder && input) {
 	        input.placeholder = this.placeholder;
 	        input.style.width = (0, _utils.getWidthOfInput)(input);
 	      }
@@ -3939,7 +3941,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'getSearchableChoices',
 	    value: function getSearchableChoices() {
 	      var filtered = this.getChoicesFilteredBySelectable();
-	      return filtered.filter(function (choice) {
+	      return filtered.filter(function () {
+	        var choice = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	        return choice.placeholder !== true;
 	      });
 	    }
@@ -4022,7 +4025,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'getPlaceholderChoice',
 	    value: function getPlaceholderChoice() {
 	      var choices = this.getChoices();
-	      var placeholderChoice = [].concat(_toConsumableArray(choices)).reverse().find(function (choice) {
+	      var placeholderChoice = [].concat(_toConsumableArray(choices)).reverse().find(function () {
+	        var choice = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
 	        return choice.placeholder === true;
 	      });
 
@@ -5126,7 +5131,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var items = function items() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
+	  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	  switch (action.type) {
 	    case 'ADD_ITEM':
@@ -5238,7 +5243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var choices = function choices() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
+	  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	  switch (action.type) {
 	    case 'ADD_CHOICE':
@@ -5479,17 +5484,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 31 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.getPlaceholder = exports.triggerEvent = exports.sortByScore = exports.sortByAlpha = exports.getWidthOfInput = exports.strToEl = exports.getRandomNumber = exports.addAnimation = exports.stripHTML = exports.isScrolledIntoView = exports.isInView = exports.getScrollPosition = exports.getAdjacentEl = exports.getElementOffset = exports.getElemDistance = exports.debounce = exports.findAncestorByAttrName = exports.findAncestor = exports.getSiblings = exports.wrap = exports.getParentsUntil = exports.whichAnimationEvent = exports.whichTransitionEvent = exports.extend = exports.isElement = exports.isNode = exports.isType = exports.getType = exports.generateId = exports.generateChars = exports.capitalise = undefined;
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-	/* eslint-disable */
+	var _lodashEs = __webpack_require__(32);
+
 	/**
 	 * Capitalises the first letter of each word in a string
 	 * @param  {String} str String to capitalise
@@ -6069,8 +6076,358 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return element.dispatchEvent(event);
 	};
 
+	/**
+	 * Access placeholder safely
+	 * @param  {Object} obj    Object to access
+	 * @param  {String} path   Path to placeholder property
+	 * @return {String}        Placeholder or ''
+	 */
+	var getPlaceholder = exports.getPlaceholder = function getPlaceholder() {
+	  var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'placeholder';
+
+	  return (0, _lodashEs.get)(obj, path, '');
+	};
+
 /***/ }),
 /* 32 */
+/***/ (function(module, exports) {
+
+	/**
+	 * @license
+	 * Lodash (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modularize exports="es" -o ./`
+	 * Copyright JS Foundation and other contributors <https://js.foundation/>
+	 * Released under MIT license <https://lodash.com/license>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 */
+	export { default as add } from './add.js';
+	export { default as after } from './after.js';
+	export { default as ary } from './ary.js';
+	export { default as assign } from './assign.js';
+	export { default as assignIn } from './assignIn.js';
+	export { default as assignInWith } from './assignInWith.js';
+	export { default as assignWith } from './assignWith.js';
+	export { default as at } from './at.js';
+	export { default as attempt } from './attempt.js';
+	export { default as before } from './before.js';
+	export { default as bind } from './bind.js';
+	export { default as bindAll } from './bindAll.js';
+	export { default as bindKey } from './bindKey.js';
+	export { default as camelCase } from './camelCase.js';
+	export { default as capitalize } from './capitalize.js';
+	export { default as castArray } from './castArray.js';
+	export { default as ceil } from './ceil.js';
+	export { default as chain } from './chain.js';
+	export { default as chunk } from './chunk.js';
+	export { default as clamp } from './clamp.js';
+	export { default as clone } from './clone.js';
+	export { default as cloneDeep } from './cloneDeep.js';
+	export { default as cloneDeepWith } from './cloneDeepWith.js';
+	export { default as cloneWith } from './cloneWith.js';
+	export { default as commit } from './commit.js';
+	export { default as compact } from './compact.js';
+	export { default as concat } from './concat.js';
+	export { default as cond } from './cond.js';
+	export { default as conforms } from './conforms.js';
+	export { default as conformsTo } from './conformsTo.js';
+	export { default as constant } from './constant.js';
+	export { default as countBy } from './countBy.js';
+	export { default as create } from './create.js';
+	export { default as curry } from './curry.js';
+	export { default as curryRight } from './curryRight.js';
+	export { default as debounce } from './debounce.js';
+	export { default as deburr } from './deburr.js';
+	export { default as defaultTo } from './defaultTo.js';
+	export { default as defaults } from './defaults.js';
+	export { default as defaultsDeep } from './defaultsDeep.js';
+	export { default as defer } from './defer.js';
+	export { default as delay } from './delay.js';
+	export { default as difference } from './difference.js';
+	export { default as differenceBy } from './differenceBy.js';
+	export { default as differenceWith } from './differenceWith.js';
+	export { default as divide } from './divide.js';
+	export { default as drop } from './drop.js';
+	export { default as dropRight } from './dropRight.js';
+	export { default as dropRightWhile } from './dropRightWhile.js';
+	export { default as dropWhile } from './dropWhile.js';
+	export { default as each } from './each.js';
+	export { default as eachRight } from './eachRight.js';
+	export { default as endsWith } from './endsWith.js';
+	export { default as entries } from './entries.js';
+	export { default as entriesIn } from './entriesIn.js';
+	export { default as eq } from './eq.js';
+	export { default as escape } from './escape.js';
+	export { default as escapeRegExp } from './escapeRegExp.js';
+	export { default as every } from './every.js';
+	export { default as extend } from './extend.js';
+	export { default as extendWith } from './extendWith.js';
+	export { default as fill } from './fill.js';
+	export { default as filter } from './filter.js';
+	export { default as find } from './find.js';
+	export { default as findIndex } from './findIndex.js';
+	export { default as findKey } from './findKey.js';
+	export { default as findLast } from './findLast.js';
+	export { default as findLastIndex } from './findLastIndex.js';
+	export { default as findLastKey } from './findLastKey.js';
+	export { default as first } from './first.js';
+	export { default as flatMap } from './flatMap.js';
+	export { default as flatMapDeep } from './flatMapDeep.js';
+	export { default as flatMapDepth } from './flatMapDepth.js';
+	export { default as flatten } from './flatten.js';
+	export { default as flattenDeep } from './flattenDeep.js';
+	export { default as flattenDepth } from './flattenDepth.js';
+	export { default as flip } from './flip.js';
+	export { default as floor } from './floor.js';
+	export { default as flow } from './flow.js';
+	export { default as flowRight } from './flowRight.js';
+	export { default as forEach } from './forEach.js';
+	export { default as forEachRight } from './forEachRight.js';
+	export { default as forIn } from './forIn.js';
+	export { default as forInRight } from './forInRight.js';
+	export { default as forOwn } from './forOwn.js';
+	export { default as forOwnRight } from './forOwnRight.js';
+	export { default as fromPairs } from './fromPairs.js';
+	export { default as functions } from './functions.js';
+	export { default as functionsIn } from './functionsIn.js';
+	export { default as get } from './get.js';
+	export { default as groupBy } from './groupBy.js';
+	export { default as gt } from './gt.js';
+	export { default as gte } from './gte.js';
+	export { default as has } from './has.js';
+	export { default as hasIn } from './hasIn.js';
+	export { default as head } from './head.js';
+	export { default as identity } from './identity.js';
+	export { default as inRange } from './inRange.js';
+	export { default as includes } from './includes.js';
+	export { default as indexOf } from './indexOf.js';
+	export { default as initial } from './initial.js';
+	export { default as intersection } from './intersection.js';
+	export { default as intersectionBy } from './intersectionBy.js';
+	export { default as intersectionWith } from './intersectionWith.js';
+	export { default as invert } from './invert.js';
+	export { default as invertBy } from './invertBy.js';
+	export { default as invoke } from './invoke.js';
+	export { default as invokeMap } from './invokeMap.js';
+	export { default as isArguments } from './isArguments.js';
+	export { default as isArray } from './isArray.js';
+	export { default as isArrayBuffer } from './isArrayBuffer.js';
+	export { default as isArrayLike } from './isArrayLike.js';
+	export { default as isArrayLikeObject } from './isArrayLikeObject.js';
+	export { default as isBoolean } from './isBoolean.js';
+	export { default as isBuffer } from './isBuffer.js';
+	export { default as isDate } from './isDate.js';
+	export { default as isElement } from './isElement.js';
+	export { default as isEmpty } from './isEmpty.js';
+	export { default as isEqual } from './isEqual.js';
+	export { default as isEqualWith } from './isEqualWith.js';
+	export { default as isError } from './isError.js';
+	export { default as isFinite } from './isFinite.js';
+	export { default as isFunction } from './isFunction.js';
+	export { default as isInteger } from './isInteger.js';
+	export { default as isLength } from './isLength.js';
+	export { default as isMap } from './isMap.js';
+	export { default as isMatch } from './isMatch.js';
+	export { default as isMatchWith } from './isMatchWith.js';
+	export { default as isNaN } from './isNaN.js';
+	export { default as isNative } from './isNative.js';
+	export { default as isNil } from './isNil.js';
+	export { default as isNull } from './isNull.js';
+	export { default as isNumber } from './isNumber.js';
+	export { default as isObject } from './isObject.js';
+	export { default as isObjectLike } from './isObjectLike.js';
+	export { default as isPlainObject } from './isPlainObject.js';
+	export { default as isRegExp } from './isRegExp.js';
+	export { default as isSafeInteger } from './isSafeInteger.js';
+	export { default as isSet } from './isSet.js';
+	export { default as isString } from './isString.js';
+	export { default as isSymbol } from './isSymbol.js';
+	export { default as isTypedArray } from './isTypedArray.js';
+	export { default as isUndefined } from './isUndefined.js';
+	export { default as isWeakMap } from './isWeakMap.js';
+	export { default as isWeakSet } from './isWeakSet.js';
+	export { default as iteratee } from './iteratee.js';
+	export { default as join } from './join.js';
+	export { default as kebabCase } from './kebabCase.js';
+	export { default as keyBy } from './keyBy.js';
+	export { default as keys } from './keys.js';
+	export { default as keysIn } from './keysIn.js';
+	export { default as last } from './last.js';
+	export { default as lastIndexOf } from './lastIndexOf.js';
+	export { default as lodash } from './wrapperLodash.js';
+	export { default as lowerCase } from './lowerCase.js';
+	export { default as lowerFirst } from './lowerFirst.js';
+	export { default as lt } from './lt.js';
+	export { default as lte } from './lte.js';
+	export { default as map } from './map.js';
+	export { default as mapKeys } from './mapKeys.js';
+	export { default as mapValues } from './mapValues.js';
+	export { default as matches } from './matches.js';
+	export { default as matchesProperty } from './matchesProperty.js';
+	export { default as max } from './max.js';
+	export { default as maxBy } from './maxBy.js';
+	export { default as mean } from './mean.js';
+	export { default as meanBy } from './meanBy.js';
+	export { default as memoize } from './memoize.js';
+	export { default as merge } from './merge.js';
+	export { default as mergeWith } from './mergeWith.js';
+	export { default as method } from './method.js';
+	export { default as methodOf } from './methodOf.js';
+	export { default as min } from './min.js';
+	export { default as minBy } from './minBy.js';
+	export { default as mixin } from './mixin.js';
+	export { default as multiply } from './multiply.js';
+	export { default as negate } from './negate.js';
+	export { default as next } from './next.js';
+	export { default as noop } from './noop.js';
+	export { default as now } from './now.js';
+	export { default as nth } from './nth.js';
+	export { default as nthArg } from './nthArg.js';
+	export { default as omit } from './omit.js';
+	export { default as omitBy } from './omitBy.js';
+	export { default as once } from './once.js';
+	export { default as orderBy } from './orderBy.js';
+	export { default as over } from './over.js';
+	export { default as overArgs } from './overArgs.js';
+	export { default as overEvery } from './overEvery.js';
+	export { default as overSome } from './overSome.js';
+	export { default as pad } from './pad.js';
+	export { default as padEnd } from './padEnd.js';
+	export { default as padStart } from './padStart.js';
+	export { default as parseInt } from './parseInt.js';
+	export { default as partial } from './partial.js';
+	export { default as partialRight } from './partialRight.js';
+	export { default as partition } from './partition.js';
+	export { default as pick } from './pick.js';
+	export { default as pickBy } from './pickBy.js';
+	export { default as plant } from './plant.js';
+	export { default as property } from './property.js';
+	export { default as propertyOf } from './propertyOf.js';
+	export { default as pull } from './pull.js';
+	export { default as pullAll } from './pullAll.js';
+	export { default as pullAllBy } from './pullAllBy.js';
+	export { default as pullAllWith } from './pullAllWith.js';
+	export { default as pullAt } from './pullAt.js';
+	export { default as random } from './random.js';
+	export { default as range } from './range.js';
+	export { default as rangeRight } from './rangeRight.js';
+	export { default as rearg } from './rearg.js';
+	export { default as reduce } from './reduce.js';
+	export { default as reduceRight } from './reduceRight.js';
+	export { default as reject } from './reject.js';
+	export { default as remove } from './remove.js';
+	export { default as repeat } from './repeat.js';
+	export { default as replace } from './replace.js';
+	export { default as rest } from './rest.js';
+	export { default as result } from './result.js';
+	export { default as reverse } from './reverse.js';
+	export { default as round } from './round.js';
+	export { default as sample } from './sample.js';
+	export { default as sampleSize } from './sampleSize.js';
+	export { default as set } from './set.js';
+	export { default as setWith } from './setWith.js';
+	export { default as shuffle } from './shuffle.js';
+	export { default as size } from './size.js';
+	export { default as slice } from './slice.js';
+	export { default as snakeCase } from './snakeCase.js';
+	export { default as some } from './some.js';
+	export { default as sortBy } from './sortBy.js';
+	export { default as sortedIndex } from './sortedIndex.js';
+	export { default as sortedIndexBy } from './sortedIndexBy.js';
+	export { default as sortedIndexOf } from './sortedIndexOf.js';
+	export { default as sortedLastIndex } from './sortedLastIndex.js';
+	export { default as sortedLastIndexBy } from './sortedLastIndexBy.js';
+	export { default as sortedLastIndexOf } from './sortedLastIndexOf.js';
+	export { default as sortedUniq } from './sortedUniq.js';
+	export { default as sortedUniqBy } from './sortedUniqBy.js';
+	export { default as split } from './split.js';
+	export { default as spread } from './spread.js';
+	export { default as startCase } from './startCase.js';
+	export { default as startsWith } from './startsWith.js';
+	export { default as stubArray } from './stubArray.js';
+	export { default as stubFalse } from './stubFalse.js';
+	export { default as stubObject } from './stubObject.js';
+	export { default as stubString } from './stubString.js';
+	export { default as stubTrue } from './stubTrue.js';
+	export { default as subtract } from './subtract.js';
+	export { default as sum } from './sum.js';
+	export { default as sumBy } from './sumBy.js';
+	export { default as tail } from './tail.js';
+	export { default as take } from './take.js';
+	export { default as takeRight } from './takeRight.js';
+	export { default as takeRightWhile } from './takeRightWhile.js';
+	export { default as takeWhile } from './takeWhile.js';
+	export { default as tap } from './tap.js';
+	export { default as template } from './template.js';
+	export { default as templateSettings } from './templateSettings.js';
+	export { default as throttle } from './throttle.js';
+	export { default as thru } from './thru.js';
+	export { default as times } from './times.js';
+	export { default as toArray } from './toArray.js';
+	export { default as toFinite } from './toFinite.js';
+	export { default as toInteger } from './toInteger.js';
+	export { default as toIterator } from './toIterator.js';
+	export { default as toJSON } from './toJSON.js';
+	export { default as toLength } from './toLength.js';
+	export { default as toLower } from './toLower.js';
+	export { default as toNumber } from './toNumber.js';
+	export { default as toPairs } from './toPairs.js';
+	export { default as toPairsIn } from './toPairsIn.js';
+	export { default as toPath } from './toPath.js';
+	export { default as toPlainObject } from './toPlainObject.js';
+	export { default as toSafeInteger } from './toSafeInteger.js';
+	export { default as toString } from './toString.js';
+	export { default as toUpper } from './toUpper.js';
+	export { default as transform } from './transform.js';
+	export { default as trim } from './trim.js';
+	export { default as trimEnd } from './trimEnd.js';
+	export { default as trimStart } from './trimStart.js';
+	export { default as truncate } from './truncate.js';
+	export { default as unary } from './unary.js';
+	export { default as unescape } from './unescape.js';
+	export { default as union } from './union.js';
+	export { default as unionBy } from './unionBy.js';
+	export { default as unionWith } from './unionWith.js';
+	export { default as uniq } from './uniq.js';
+	export { default as uniqBy } from './uniqBy.js';
+	export { default as uniqWith } from './uniqWith.js';
+	export { default as uniqueId } from './uniqueId.js';
+	export { default as unset } from './unset.js';
+	export { default as unzip } from './unzip.js';
+	export { default as unzipWith } from './unzipWith.js';
+	export { default as update } from './update.js';
+	export { default as updateWith } from './updateWith.js';
+	export { default as upperCase } from './upperCase.js';
+	export { default as upperFirst } from './upperFirst.js';
+	export { default as value } from './value.js';
+	export { default as valueOf } from './valueOf.js';
+	export { default as values } from './values.js';
+	export { default as valuesIn } from './valuesIn.js';
+	export { default as without } from './without.js';
+	export { default as words } from './words.js';
+	export { default as wrap } from './wrap.js';
+	export { default as wrapperAt } from './wrapperAt.js';
+	export { default as wrapperChain } from './wrapperChain.js';
+	export { default as wrapperCommit } from './commit.js';
+	export { default as wrapperLodash } from './wrapperLodash.js';
+	export { default as wrapperNext } from './next.js';
+	export { default as wrapperPlant } from './plant.js';
+	export { default as wrapperReverse } from './wrapperReverse.js';
+	export { default as wrapperToIterator } from './toIterator.js';
+	export { default as wrapperValue } from './wrapperValue.js';
+	export { default as xor } from './xor.js';
+	export { default as xorBy } from './xorBy.js';
+	export { default as xorWith } from './xorWith.js';
+	export { default as zip } from './zip.js';
+	export { default as zipObject } from './zipObject.js';
+	export { default as zipObjectDeep } from './zipObjectDeep.js';
+	export { default as zipWith } from './zipWith.js';
+	export { default } from './lodash.default.js';
+
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports) {
 
 	'use strict';
